@@ -4,9 +4,6 @@ class Sqsh < Formula
   url "https://downloads.sourceforge.net/project/sqsh/sqsh/sqsh-2.5/sqsh-2.5.16.1.tgz"
   sha256 "d6641f365ace60225fc0fa48f82b9dbed77a4e506a0e497eb6889e096b8320f2"
 
-  deprecated_option "enable-x" => "with-x11"
-
-  depends_on :x11 => :optional
   depends_on "freetds"
   depends_on "readline"
 
@@ -24,12 +21,6 @@ class Sqsh < Formula
     readline = Formula["readline"]
     ENV["LIBDIRS"] = readline.opt_lib
     ENV["INCDIRS"] = readline.opt_include
-
-    if build.with? "x11"
-      args << "--with-x"
-      args << "--x-libraries=#{MacOS::X11.lib}"
-      args << "--x-includes=#{MacOS::X11.include}"
-    end
 
     ENV["SYBASE"] = Formula["freetds"].opt_prefix
     system "./configure", *args
