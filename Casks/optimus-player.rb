@@ -4,7 +4,7 @@ cask 'optimus-player' do
 
   url "https://download.optimusplayer.com/Optimus%20Player%20#{version}.dmg"
   name 'Optimus Player'
-  homepage 'https://www.optimusplayer.com'
+  homepage 'https://www.optimusplayer.com/'
 
   app 'Optimus Player.app'
 end

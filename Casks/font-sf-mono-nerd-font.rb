@@ -2,7 +2,8 @@ cask 'font-sf-mono-nerd-font' do
   version '15.0d5e1'
   sha256 '4396b843b62a55adc2f4821d83b079008e365a6fb8c9b707fc8fbe54635c9ec0'
 
-  url "file:///Users/matt/Library/Mobile%20Documents/com~apple~CloudDocs/Archive/Fonts/SFMono%20Nerd%20Font.zip"
+  # /Users/matt/Library/Mobile%20Documents/com~apple~CloudDocs/Archive/Fonts/SFMono%20Nerd%20Font.zip was verified as official when first introduced to the cask
+  url 'file:///Users/matt/Library/Mobile%20Documents/com~apple~CloudDocs/Archive/Fonts/SFMono%20Nerd%20Font.zip'
   name 'SFMono Nerd Font'
   homepage 'https://developer.apple.com/fonts/'
 

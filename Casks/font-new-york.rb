@@ -8,5 +8,5 @@ cask 'font-new-york' do
 
   pkg 'NY Fonts.pkg'
 
-  uninstall pkgutil: [ '^com.apple.pkg.NYFonts$' ]
+  uninstall pkgutil: ['^com.apple.pkg.NYFonts$']
 end

@@ -8,5 +8,5 @@ cask 'font-sf-mono' do
 
   pkg 'SF Mono Fonts.pkg'
 
-  uninstall pkgutil: [ '^com.apple.pkg.SFMonoFonts$' ]
+  uninstall pkgutil: ['^com.apple.pkg.SFMonoFonts$']
 end
