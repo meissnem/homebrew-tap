@@ -11,5 +11,7 @@ cask "mimestream" do
 
   depends_on macos: ">= :catalina"
 
+  auto_updates true
+
   app "Mimestream.app"
 end
