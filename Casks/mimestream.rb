@@ -4,14 +4,13 @@ cask "mimestream" do
 
   # storage.googleapis.com was verified as official when first introduced to the cask
   url "https://storage.googleapis.com/mimestream-releases/Mimestream_#{version}.dmg"
-  appcast "https://storage.googleapis.com/mimestream-releases/appcast.xml"
+  appcast "https://mimestream.com/appcast.xml"
   name "Mimestream"
   desc "Native email client for Gmail"
   homepage "https://mimestream.com/"
 
-  depends_on macos: ">= :catalina"
-
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Mimestream.app"
 end
