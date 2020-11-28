@@ -6,6 +6,7 @@ class Locationchanger < Formula
   sha256 "3566ae5d436dfc0a0ecf69616a0501e8e29e5e0f4268907ac084427cb2bda645"
 
   bottle do
+    root_url "https://github.com/meissnem/homebrew-meissnem/releases/download"
     cellar :any_skip_relocation
     sha256 "119d339200106da90076b16d45e1431a61154197c6135c17dec618a553a8fb8c" => :big_sur
   end
