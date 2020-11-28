@@ -20,7 +20,7 @@ class Locationchanger < Formula
     system "/bin/bash", "-x", "locationchanger.sh"
   end
 
-  plist_options :startup => true
+  plist_options startup: true
 
   test do
     system "false"
