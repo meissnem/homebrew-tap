@@ -5,6 +5,11 @@ class Locationchanger < Formula
   version "0.1"
   sha256 "3566ae5d436dfc0a0ecf69616a0501e8e29e5e0f4268907ac084427cb2bda645"
 
+  bottle do
+    cellar :any_skip_relocation
+    sha256 "119d339200106da90076b16d45e1431a61154197c6135c17dec618a553a8fb8c" => :big_sur
+  end
+
   def install
     inreplace "locationchanger.sh" do |s|
       s.gsub! "sudo -v", ""
@@ -20,7 +25,7 @@ class Locationchanger < Formula
     system "/bin/bash", "-x", "locationchanger.sh"
   end
 
-  plist_options :startup => true
+  plist_options startup: true
 
   test do
     system "false"
