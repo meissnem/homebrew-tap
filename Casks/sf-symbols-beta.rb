@@ -1,15 +1,16 @@
-cask 'sf-symbols-beta' do
+cask "sf-symbols-beta" do
   version :latest
   sha256 :no_check
 
-  url 'https://developer.apple.com/design/downloads/SF-Symbols-2.dmg'
-  name 'SF Symbols'
-  homepage 'https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/'
+  url "https://developer.apple.com/design/downloads/SF-Symbols-2.dmg"
+  name "SF Symbols"
+  desc "Tool that provides consistent, highly configurable symbols for apps"
+  homepage "https://developer.apple.com/design/human-interface-guidelines/sf-symbols/overview/"
 
-  depends_on macos: '>= :mojave'
+  depends_on macos: ">= :mojave"
 
-  pkg 'SF Symbols.pkg'
+  pkg "SF Symbols.pkg"
 
-  uninstall pkgutil: 'com.apple.SFSymbols.plist',
-            delete:  '/Applications/SF Symbols.app'
+  uninstall pkgutil: "com.apple.SFSymbols.plist",
+            delete:  "/Applications/SF Symbols.app"
 end
