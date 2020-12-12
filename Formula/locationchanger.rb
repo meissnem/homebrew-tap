@@ -2,14 +2,8 @@ class Locationchanger < Formula
   desc "Change network location based on the name of Wi-Fi network"
   homepage "https://github.com/eprev/locationchanger"
   url "https://github.com/eprev/locationchanger/raw/master/locationchanger.sh"
-  version "0.1"
-  sha256 "3566ae5d436dfc0a0ecf69616a0501e8e29e5e0f4268907ac084427cb2bda645"
-
-  bottle do
-    root_url "https://github.com/meissnem/homebrew-meissnem/releases/download/locationchanger-0.1"
-    cellar :any_skip_relocation
-    sha256 "119d339200106da90076b16d45e1431a61154197c6135c17dec618a553a8fb8c" => :big_sur
-  end
+  version "0.1-1"
+  sha256 "1107e5b701ff2f76e482787f6e7e714db2aad0328b3902bb84d8c61d94bb26e6"
 
   def install
     inreplace "locationchanger.sh" do |s|
