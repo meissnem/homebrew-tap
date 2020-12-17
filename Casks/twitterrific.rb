@@ -1,8 +1,8 @@
 cask "twitterrific" do
-  version "5.4.5+151"
+  version "5.4.5,151"
   sha256 "ca03e8b989a16cfb88cb86c776c42a7c88110ba1c9db5adf3b55fe15b85e3e57"
 
-  url "https://downloads.iconfactory.com/phoenix/Twitterrific-#{version}.zip",
+  url "https://downloads.iconfactory.com/phoenix/Twitterrific-#{version.before_comma}%2b#{version.after_comma}.zip",
     verified: "downloads.iconfactory.com/phoenix"
   appcast "https://iconfactory.com/appcasts/Phoenix/appcast.xml"
   name "Twitterrific"
