@@ -1,6 +1,6 @@
 cask "font-sf-mono" do
-  version "16.0d2e1"
-  sha256  "fe04fe76d4f3847dc401566c47de14c0d14679d624680671b5d03938bf2ca22f"
+  version :latest
+  sha256  :no_check
 
   url "https://devimages-cdn.apple.com/design/resources/download/SF-Mono.dmg"
   name "SF Mono"
