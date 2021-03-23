@@ -1,8 +1,8 @@
-cask "netnewswire-6" do
-  version "6.0d5"
-  sha256 "74b84ffd48722d3502828736f0d747d1f5d7dd1b010844f519fcf8a1e06184a8"
+cask "netnewswireAT6" do
+  version "6.0b3,6023"
+  sha256 "43e8fc5f925e012d01025d46062b55d409287e09ea36a9b2264e0f5108998aa8"
 
-  url "https://github.com/Ranchero-Software/NetNewsWire/releases/download/mac-#{version.split("d").first}dev#{version.split("d").last}/NetNewsWire#{version}.zip",
+  url "https://github.com/Ranchero-Software/NetNewsWire/releases/download/mac-#{version.before_comma.split("b").first}beta#{version.before_comma.split("b").last}/NetNewsWire#{version.before_comma}.zip",
       verified: "https://github.com/Ranchero-Software/NetNewsWire/"
   name "NetNewsWire"
   desc "Free and open-source RSS reader"
