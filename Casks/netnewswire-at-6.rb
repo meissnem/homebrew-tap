@@ -1,4 +1,4 @@
-cask "netnewswireAT6" do
+cask "netnewswire-at-6" do
   version "6.0b3,6023"
   sha256 "43e8fc5f925e012d01025d46062b55d409287e09ea36a9b2264e0f5108998aa8"
 
