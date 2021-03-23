@@ -4,10 +4,14 @@ cask "netnewswire-6" do
 
   url "https://github.com/Ranchero-Software/NetNewsWire/releases/download/mac-#{version.split("d").first}dev#{version.split("d").last}/NetNewsWire#{version}.zip",
       verified: "https://github.com/Ranchero-Software/NetNewsWire/"
-  appcast "https://ranchero.com/downloads/netnewswire6-beta.xml"
   name "NetNewsWire"
   desc "Free and open-source RSS reader"
   homepage "https://ranchero.com/netnewswire/"
+
+  livecheck do
+    url "https://ranchero.com/downloads/netnewswire6-beta.xml"
+    strategy :sparkle
+  end
 
   auto_updates true
   # conflicts_with cask: "netnewswire"

@@ -10,8 +10,8 @@ class Locationchanger < Formula
       s.gsub! "sudo -v", ""
       s.gsub! "sudo", ""
       s.gsub! "/usr/local", prefix.to_s
-      s.gsub! /LAUNCH_AGENTS_DIR=.*/, "LAUNCH_AGENTS_DIR=#{prefix}"
-      s.gsub! /PLIST_NAME=.*/, "PLIST_NAME=#{plist_path}"
+      s.gsub!(/LAUNCH_AGENTS_DIR=.*/, "LAUNCH_AGENTS_DIR=#{prefix}")
+      s.gsub!(/PLIST_NAME=.*/, "PLIST_NAME=#{plist_path}")
       s.gsub! "launchctl load", "#launchctl load"
     end
 

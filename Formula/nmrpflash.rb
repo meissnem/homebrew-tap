@@ -6,8 +6,7 @@ class Nmrpflash < Formula
 
   bottle do
     root_url "https://github.com/meissnem/homebrew-meissnem/releases/download/nmrpflash-0.9.13"
-    cellar :any_skip_relocation
-    sha256 "123d158f3d96d2ebf2cc9fd043ebe04384eff4acbbc9592c5a5929079e486097" => :big_sur
+    sha256 cellar: :any_skip_relocation, big_sur: "123d158f3d96d2ebf2cc9fd043ebe04384eff4acbbc9592c5a5929079e486097"
   end
 
   def install

@@ -4,10 +4,14 @@ cask "mimestream" do
 
   url "https://storage.googleapis.com/mimestream-releases/Mimestream_#{version}.dmg",
       verified: "storage.googleapis.com/mimestream-releases"
-  appcast "https://mimestream.com/appcast.xml"
   name "Mimestream"
   desc "Native email client for Gmail"
   homepage "https://mimestream.com/"
+
+  livecheck do
+    url "https://mimestream.com/appcast.xml"
+    strategy :sparkle
+  end
 
   auto_updates true
   depends_on macos: ">= :catalina"
