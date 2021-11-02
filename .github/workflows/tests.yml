@@ -1,13 +1,14 @@
 name: brew test-bot
 on:
   push:
-    branches: main
+    branches:
+      - main
   pull_request:
 jobs:
   test-bot:
     strategy:
       matrix:
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
