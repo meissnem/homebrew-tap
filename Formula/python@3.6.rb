@@ -1,8 +1,8 @@
 class PythonAT36 < Formula
   desc "Interpreted, interactive, object-oriented programming language"
   homepage "https://www.python.org/"
-  url "https://www.python.org/ftp/python/3.6.13/Python-3.6.13.tar.xz"
-  sha256 "a47a43a53abb42286a2c11965343ff56711b9e64e8d11bf2c6701a4fb8ce1a0f"
+  url "https://www.python.org/ftp/python/3.6.15/Python-3.6.15.tar.xz"
+  sha256 "6e28d7cdd6dd513dd190e49bca3972e20fcf455090ccf2ef3f1a227614135d91"
   license "Python-2.0"
 
   livecheck do
