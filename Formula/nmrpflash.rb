@@ -9,7 +9,7 @@ class Nmrpflash < Formula
     sha256 cellar: :any_skip_relocation, big_sur: "123d158f3d96d2ebf2cc9fd043ebe04384eff4acbbc9592c5a5929079e486097"
   end
 
-  depends_on :libpcap if OS.linux?
+  depends_on "libpcap" if OS.linux?
 
   def install
     mkdir_p prefix/"bin"
