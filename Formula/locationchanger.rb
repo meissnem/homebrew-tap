@@ -5,13 +5,15 @@ class Locationchanger < Formula
   version "0.1-1"
   sha256 "1107e5b701ff2f76e482787f6e7e714db2aad0328b3902bb84d8c61d94bb26e6"
 
+  depends_on :macos
+
   def install
     inreplace "locationchanger.sh" do |s|
       s.gsub! "sudo -v", ""
       s.gsub! "sudo", ""
       s.gsub! "/usr/local", prefix.to_s
       s.gsub!(/LAUNCH_AGENTS_DIR=.*/, "LAUNCH_AGENTS_DIR=#{prefix}")
-      s.gsub!(/PLIST_NAME=.*/, "PLIST_NAME=#{plist_path}")
+      s.gsub!(/PLIST_NAME=.*/, "PLIST_NAME=#{prefix}/#{plist_name}.plist")
       s.gsub! "launchctl load", "#launchctl load"
     end
 
@@ -23,6 +25,5 @@ class Locationchanger < Formula
   plist_options startup: true
 
   test do
-    system "false"
   end
 end
