@@ -5,8 +5,9 @@ class Nmrpflash < Formula
   sha256 "ccb5974a9574f0ce361f8d2d68f743957a44c9e27dc9490589e8f91c9f8f6bb6"
 
   bottle do
-    root_url "https://github.com/meissnem/homebrew-meissnem/releases/download/nmrpflash-0.9.16"
-    sha256 cellar: :any_skip_relocation, big_sur: "123d158f3d96d2ebf2cc9fd043ebe04384eff4acbbc9592c5a5929079e486097"
+    root_url "https://github.com/meissnem/homebrew-tap/releases/download/nmrpflash-0.9.16"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, catalina: "c07a37fadecd4b0890b98cfb9cf02b068745d24bde4c03a9ebd0f24ad741036f"
   end
 
   depends_on :macos
