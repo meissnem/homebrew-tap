@@ -112,9 +112,7 @@ class PythonAT36 < Formula
     ENV["PYTHONPATH"] = nil
 
     # Override the auto-detection in setup.py, which assumes a universal build.
-    on_macos do
-      ENV["PYTHON_DECIMAL_WITH_MACHINE"] = "x64"
-    end
+    ENV["PYTHON_DECIMAL_WITH_MACHINE"] = "x64" if OS.mac?
 
     args = %W[
       --prefix=#{prefix}
@@ -129,12 +127,12 @@ class PythonAT36 < Formula
 
     args << "--without-gcc" if ENV.compiler == :clang
 
-    on_macos do
+    if OS.mac?
       args << "--enable-framework=#{frameworks}"
       args << "--with-dtrace"
     end
 
-    on_linux do
+    if OS.linux?
       args << "--enable-shared"
 
       # Required for the _ctypes module
@@ -162,7 +160,7 @@ class PythonAT36 < Formula
     # Python's setup.py parses CPPFLAGS and LDFLAGS to learn search
     # paths for the dependencies of the compiled extension modules.
     # See Linuxbrew/linuxbrew#420, Linuxbrew/linuxbrew#460, and Linuxbrew/linuxbrew#875
-    on_linux do
+    if OS.linux?
       cppflags << ENV.cppflags << " -I#{HOMEBREW_PREFIX}/include"
       ldflags << ENV.ldflags << " -L#{HOMEBREW_PREFIX}/lib"
     end
@@ -197,15 +195,13 @@ class PythonAT36 < Formula
     ENV.deparallelize do
       # Tell Python not to install into /Applications (default for framework builds)
       system "make", "install", "PYTHONAPPSDIR=#{prefix}"
-      on_macos do
-        system "make", "frameworkinstallextras", "PYTHONAPPSDIR=#{pkgshare}"
-      end
+      system "make", "frameworkinstallextras", "PYTHONAPPSDIR=#{pkgshare}" if OS.mac?
     end
 
     # Any .app get a " 3" attached, so it does not conflict with python 2.x.
     Dir.glob("#{prefix}/*.app") { |app| mv app, app.sub(/\.app$/, " 3.app") }
 
-    on_macos do
+    if OS.mac?
       # Prevent third-party packages from building against fragile Cellar paths
       inreplace Dir[lib_cellar/"**/_sysconfigdata_m_darwin_darwin.py",
                     lib_cellar/"config*/Makefile",
@@ -223,7 +219,7 @@ class PythonAT36 < Formula
                 "\\1'#{opt_prefix}/Frameworks/\\2'"
     end
 
-    on_linux do
+    if OS.linux?
       # Prevent third-party packages from building against fragile Cellar paths
       inreplace Dir[lib_cellar/"**/_sysconfigdata_m_linux_x86_64-*.py",
                     lib_cellar/"config*/Makefile",

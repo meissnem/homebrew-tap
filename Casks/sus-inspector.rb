@@ -4,7 +4,7 @@ cask "sus-inspector" do
 
   url "https://github.com/hjuutilainen/sus-inspector/releases/download/v#{version}/SUS-Inspector-#{version}.dmg"
   name "SUS Inspector"
-  desc "Inspect Apple macOS software updates."
+  desc "Inspect Apple software updates"
   homepage "https://github.com/hjuutilainen/sus-inspector/"
 
   livecheck do
@@ -12,19 +12,15 @@ cask "sus-inspector" do
     strategy :github_latest
   end
 
-#  livecheck do
-#    url "https://www.xquartz.org/releases/sparkle/release.xml"
-#    strategy :sparkle do |item|
-#      item.short_version.delete_prefix("XQuartz-")
-#    end
-#  end
+  # livecheck do
+  #   url "https://www.xquartz.org/releases/sparkle/release.xml"
+  #   strategy :sparkle do |item|
+  #     item.short_version.delete_prefix("XQuartz-")
+  #   end
+  # end
 
   app "SUS Inspector.app"
 
-  zap trash: [
-    "~/Library/Application Support/SUS Inspector/*",
-  ],
-  rmdir: [
-    "~/Library/Application Support/SUS Inspector",
-  ]
+  zap trash: ["~/Library/Application Support/SUS Inspector/*"],
+      rmdir: ["~/Library/Application Support/SUS Inspector"]
 end
