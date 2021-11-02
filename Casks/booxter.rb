@@ -1,4 +1,3 @@
-# bump
 cask "booxter" do
   version "2.8.2,2.8.200"
   sha256 "e54e5197ea92d0e7027d6002b755de35c7510076e74ab880ace16a5549e277d2"

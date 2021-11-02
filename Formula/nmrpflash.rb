@@ -1,4 +1,3 @@
-# bump
 class Nmrpflash < Formula
   desc "Netgear Unbrick Utility"
   homepage "https://github.com/jclehner/nmrpflash"

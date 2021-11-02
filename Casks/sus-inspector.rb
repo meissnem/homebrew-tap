@@ -1,4 +1,3 @@
-# bump
 cask "sus-inspector" do
   version "2.0b1"
   sha256 "344d43ba3e77320f9a9d5a5b9383d5c28ada63565f0c375b4dda5f2495d92b97"
