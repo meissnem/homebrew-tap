@@ -25,5 +25,6 @@ class Locationchanger < Formula
   plist_options startup: true
 
   test do
+    system "true"
   end
 end

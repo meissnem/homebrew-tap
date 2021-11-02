@@ -17,5 +17,6 @@ class Nmrpflash < Formula
   end
 
   test do
+    system "true"
   end
 end
