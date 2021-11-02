@@ -1,3 +1,4 @@
+# bump
 class RedisAT5 < Formula
   desc "Persistent key-value database, with built-in net interface"
   homepage "https://redis.io/"

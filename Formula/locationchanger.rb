@@ -1,3 +1,4 @@
+# bump
 class Locationchanger < Formula
   desc "Change network location based on the name of Wi-Fi network"
   homepage "https://github.com/eprev/locationchanger"
