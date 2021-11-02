@@ -10,6 +10,13 @@ class RedisAT5 < Formula
     regex(/href=.*?redis[._-](5(?:\.\d+)+)\.t/i)
   end
 
+  bottle do
+    root_url "https://github.com/meissnem/homebrew-tap/releases/download/redis@5-5.0.14"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, catalina:     "1b6c2a96ae256d5f1d9e4b1fab2d79110aea43d04f110098f5833b1c18bc8fb0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "6ae210e2f7969e66998f96517ccf6042484a47489b60b031ff86fbe4e27bfc8c"
+  end
+
   keg_only :versioned_formula
 
   depends_on "openssl@1.1"
