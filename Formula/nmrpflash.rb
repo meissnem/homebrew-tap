@@ -1,11 +1,11 @@
 class Nmrpflash < Formula
   desc "Netgear Unbrick Utility"
   homepage "https://github.com/jclehner/nmrpflash"
-  url "https://github.com/jclehner/nmrpflash/archive/v0.9.13.tar.gz"
-  sha256 "33cdb7cae2083e7f45f709235e379f8a77fa0bcca51c0f7aafbf322a54d2a154"
+  url "https://github.com/jclehner/nmrpflash/archive/v0.9.16.tar.gz"
+  sha256 "ccb5974a9574f0ce361f8d2d68f743957a44c9e27dc9490589e8f91c9f8f6bb6"
 
   bottle do
-    root_url "https://github.com/meissnem/homebrew-meissnem/releases/download/nmrpflash-0.9.13"
+    root_url "https://github.com/meissnem/homebrew-meissnem/releases/download/nmrpflash-0.9.16"
     sha256 cellar: :any_skip_relocation, big_sur: "123d158f3d96d2ebf2cc9fd043ebe04384eff4acbbc9592c5a5929079e486097"
   end
 
