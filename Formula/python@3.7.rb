@@ -11,14 +11,6 @@ class PythonAT37 < Formula
     regex(%r{href=.*?v?(3\.7(?:\.\d+)*)/?["' >]}i)
   end
 
-  bottle do
-    sha256 monterey:     "03e684d64e7ce907b690f87d38c0d4fd579cb3c84a3a567185ed8b27eed096ef"
-    sha256 big_sur:      "76831700c7e63dd2373244c8aba96b09f861f179c46f9a2a7a7c00b3078fa66a"
-    sha256 catalina:     "b8b0cf6f2f7efd791c23e11dca7fd955c71bbb3d664a24a799e34424c2472c57"
-    sha256 mojave:       "aa8a60fbd7abed9fee6664597a0ed150cddec8dabdc99a5e0eed18bd150b0ca4"
-    sha256 x86_64_linux: "de0aacaf8d47cc5d5594ef72cf631cce7635c98a2f51a028ca1b6deb55dee637"
-  end
-
   # setuptools remembers the build flags python is built with and uses them to
   # build packages later. Xcode-only systems need different flags.
   pour_bottle? only_if: :clt_installed
@@ -26,7 +18,6 @@ class PythonAT37 < Formula
   keg_only :versioned_formula
 
   depends_on "pkg-config" => :build
-  depends_on arch: :x86_64
   depends_on "gdbm"
   depends_on "mpdecimal"
   depends_on "openssl@1.1"
@@ -84,6 +75,12 @@ class PythonAT37 < Formula
     sha256 "aa9a3002420079a7d2c6033d80b49038d490984a9ddb3d1195bb48ca7fb4a1f0"
   end
 
+  # Backport to enable python 3.7 to build on arm64.
+  patch do
+    url "https://gist.githubusercontent.com/meissnem/5ac5fc989615d7c0c4c871b04476166d/raw/64728ac6939de29a6e1c5c5ff4aa0d6ffcec61bd/python3.7-arm64-backport.diff"
+    sha256 "1fbb798c7cba7ee6c8c16ba687c1d6253c825a0d0890b43222fc5a24773f70ac"
+  end
+
   def lib_cellar
     on_macos do
       return prefix/"Frameworks/Python.framework/Versions/#{version.major_minor}/lib/python#{version.major_minor}"
@@ -127,6 +124,7 @@ class PythonAT37 < Formula
     if OS.mac?
       args << "--enable-framework=#{frameworks}"
       args << "--with-dtrace"
+      args << "--with-dbmliborder=gdbm:ndbm:"
     else
       args << "--enable-shared"
 
@@ -135,9 +133,17 @@ class PythonAT37 < Formula
       args << "--with-system-ffi"
     end
 
-    cflags   = []
-    ldflags  = []
-    cppflags = []
+    # Python re-uses flags when building native modules.
+    # Since we don't want native modules prioritizing the brew
+    # include path, we move them to [C|LD]FLAGS_NODIST.
+    # Note: Changing CPPFLAGS causes issues with dbm, so we
+    # leave it as-is.
+    cflags          = []
+    cflags_nodist   = ["-I#{HOMEBREW_PREFIX}/include"]
+    ldflags         = []
+    ldflags_nodist  = ["-L#{HOMEBREW_PREFIX}/lib", "-Wl,-rpath,#{HOMEBREW_PREFIX}/lib"]
+    cppflags        = []
+    cppflags_nodist = ["-I#{HOMEBREW_PREFIX}/include"]
 
     if MacOS.sdk_path_if_needed
       # Help Python's build system (setuptools/pip) to build things on SDK-based systems
@@ -192,8 +198,11 @@ class PythonAT37 < Formula
     end
 
     args << "CFLAGS=#{cflags.join(" ")}" unless cflags.empty?
+    args << "CFLAGS_NODIST=#{cflags_nodist.join(" ")}" unless cflags_nodist.empty?
     args << "LDFLAGS=#{ldflags.join(" ")}" unless ldflags.empty?
+    args << "LDFLAGS_NODIST=#{ldflags_nodist.join(" ")}" unless ldflags_nodist.empty?
     args << "CPPFLAGS=#{cppflags.join(" ")}" unless cppflags.empty?
+    args << "CPPFLAGS_NODIST=#{cppflags_nodist.join(" ")}" unless cppflags_nodist.empty?
 
     system "./configure", *args
     system "make"
