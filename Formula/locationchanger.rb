@@ -8,7 +8,8 @@ class Locationchanger < Formula
   bottle do
     root_url "https://github.com/meissnem/homebrew-tap/releases/download/locationchanger-0.1-1"
     rebuild 1
-    sha256 cellar: :any_skip_relocation, catalina: "5d0ce60cd11035a117482dbcbb6f39433498f6507ea91656bef9b8dc5afb24bc"
+    sha256 cellar: :any_skip_relocation, arm64_monterey: "99317716294c054c625562a1765c68dbe37cfdc46adb9070015a1297a467bbd0"
+    sha256 cellar: :any_skip_relocation, catalina:       "5d0ce60cd11035a117482dbcbb6f39433498f6507ea91656bef9b8dc5afb24bc"
   end
 
   depends_on :macos
