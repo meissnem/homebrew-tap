@@ -6,15 +6,15 @@ class PythonAT37 < Formula
   license "Python-2.0"
   revision 1
 
+  livecheck do
+    url "https://www.python.org/ftp/python/"
+    regex(%r{href=.*?v?(3\.7(?:\.\d+)*)/?["' >]}i)
+  end
+
   bottle do
     root_url "https://github.com/meissnem/homebrew-tap/releases/download/python@3.7-3.7.12_1"
     sha256 arm64_monterey: "8c9ea2cf8438bad4b4c52eb973ec17c878aded1017849e1e2ab5dc867a20d21c"
     sha256 monterey:       "9a45af419b4adabfc3b5d9ab4d3b60ca37e7d1cea945279ca44631fe0483c62f"
-  end
-
-  livecheck do
-    url "https://www.python.org/ftp/python/"
-    regex(%r{href=.*?v?(3\.7(?:\.\d+)*)/?["' >]}i)
   end
 
   # setuptools remembers the build flags python is built with and uses them to
