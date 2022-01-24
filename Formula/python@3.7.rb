@@ -13,8 +13,9 @@ class PythonAT37 < Formula
 
   bottle do
     root_url "https://github.com/meissnem/homebrew-tap/releases/download/python@3.7-3.7.12_1"
-    sha256 arm64_monterey: "8c9ea2cf8438bad4b4c52eb973ec17c878aded1017849e1e2ab5dc867a20d21c"
-    sha256 monterey:       "9a45af419b4adabfc3b5d9ab4d3b60ca37e7d1cea945279ca44631fe0483c62f"
+    rebuild 1
+    sha256 big_sur:  "c56840aae70e0c3dd46c86dbf41d2e7432ee34e268d4da0fcdbae11d65d90dad"
+    sha256 catalina: "b994c339b3053219d6bb832332ca6739d9792c803c681c7cb2244ab55798fbb7"
   end
 
   # setuptools remembers the build flags python is built with and uses them to
