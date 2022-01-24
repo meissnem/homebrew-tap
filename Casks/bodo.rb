@@ -2,7 +2,7 @@ cask "bodo" do
   version "0.5.7,65"
   sha256 "6465653a6ec079e9bd0410af177db9de16203840313c3efdaa90c0de7c29fb95"
 
-  url "https://download.getbodo.com/Bodo_#{version.before_comma}.dmg"
+  url "https://download.getbodo.com/Bodo_#{version.csv.first}.dmg"
   name "Bodo"
   desc "Better way to use Jira"
   homepage "https://getbodo.com/"
