@@ -21,6 +21,7 @@ class HcPostgis < Formula
     ENV.deparallelize
 
     args = [
+      "--prefix=#{prefix}",
       "--with-projdir=#{Formula["hc-proj"].opt_prefix}",
       "--with-jsondir=#{Formula["json-c"].opt_prefix}",
       "--with-pgconfig=#{Formula["hc-postgresql"].opt_bin}/pg_config",
