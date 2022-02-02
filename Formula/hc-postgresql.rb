@@ -10,6 +10,13 @@ class HcPostgresql < Formula
     regex(%r{href=["']?v?(11(?:\.\d+)+)/?["' >]}i)
   end
 
+  bottle do
+    root_url "https://github.com/meissnem/homebrew-tap/releases/download/hc-postgresql-11.14"
+    sha256 big_sur:      "200b75f4e7c8a47599ef0d93b82a39212d7605fab687a482660718e71dad2e81"
+    sha256 catalina:     "ce6e538e65e5b5767f4d8d47a716ba46e79121f01627c693b4d7cde1d0ff522b"
+    sha256 x86_64_linux: "b362745e3961dc78c7698c3a2a5a4e61be313745fad1108e4e57e1f2e788a40c"
+  end
+
   # https://www.postgresql.org/support/versioning/
   deprecate! date: "2023-11-09", because: :unsupported
 
