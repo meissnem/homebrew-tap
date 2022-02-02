@@ -4,6 +4,13 @@ class HcProj < Formula
   url "https://download.osgeo.org/proj/proj-5.2.0.tar.gz"
   sha256 "ef919499ffbc62a4aae2659a55e2b25ff09cccbbe230656ba71c6224056c7e60"
 
+  bottle do
+    root_url "https://github.com/meissnem/homebrew-tap/releases/download/hc-proj-5.2.0"
+    sha256 big_sur:      "dea48265e0ce468890a1254a5fbdd54c278d8cee6658b1a0b68657591079655b"
+    sha256 catalina:     "a8f4f8c397f1e8b8188958e3ebefccb4a4455b640c81545e015a8de4ccbe8bc0"
+    sha256 x86_64_linux: "8b8885dd10b16d62e4de030375c62a5ab287925bd6ec41fdd8ea7543e602be39"
+  end
+
   keg_only :versioned_formula
 
   conflicts_with "blast", because: "both install a `libproj.a` library"
