@@ -1,4 +1,4 @@
-class RedisAT5 < Formula
+class HcRedis < Formula
   desc "Persistent key-value database, with built-in net interface"
   homepage "https://redis.io/"
   url "https://download.redis.io/releases/redis-5.0.14.tar.gz"
@@ -10,72 +10,39 @@ class RedisAT5 < Formula
     regex(/href=.*?redis[._-](5(?:\.\d+)+)\.t/i)
   end
 
-  bottle do
-    root_url "https://github.com/meissnem/homebrew-tap/releases/download/redis@5-5.0.14"
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, catalina:     "1b6c2a96ae256d5f1d9e4b1fab2d79110aea43d04f110098f5833b1c18bc8fb0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "6ae210e2f7969e66998f96517ccf6042484a47489b60b031ff86fbe4e27bfc8c"
-  end
-
-  keg_only :versioned_formula
-
   depends_on "openssl@1.1"
+
+  conflicts_with "redis", beacuse: "cannot have two redises"
 
   patch :DATA
 
   def install
     system "make", "install", "PREFIX=#{prefix}", "CC=#{ENV.cc}", "BUILD_TLS=yes"
 
-    %w[run db/redis@5 log].each { |p| (var/p).mkpath }
+    %w[run db/redis log].each { |p| (var/p).mkpath }
 
     # Fix up default conf file to match our paths
     inreplace "redis.conf" do |s|
-      s.gsub! "/var/run/redis.pid", var/"run/redis@5.pid"
-      s.gsub! "dir ./", "dir #{var}/db/redis@5/"
+      s.gsub! "/var/run/redis.pid", var/"run/redis.pid"
+      s.gsub! "dir ./", "dir #{var}/db/redis/"
       s.sub!(/^bind .*$/, "bind 127.0.0.1 ::1")
     end
 
-    etc.install "redis.conf" => "redis@5.conf"
-    etc.install "sentinel.conf" => "redis@5-sentinel.conf"
+    etc.install "redis.conf"
+    etc.install "sentinel.conf" => "redis-sentinel.conf"
   end
 
-  plist_options manual: "redis-server #{HOMEBREW_PREFIX}/etc/redis@5.conf"
-
-  def plist
-    <<~EOS
-      <?xml version="1.0" encoding="UTF-8"?>
-      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-      <plist version="1.0">
-        <dict>
-          <key>KeepAlive</key>
-          <dict>
-            <key>SuccessfulExit</key>
-            <false/>
-          </dict>
-          <key>Label</key>
-          <string>#{plist_name}</string>
-          <key>ProgramArguments</key>
-          <array>
-            <string>#{opt_bin}/redis-server</string>
-            <string>#{etc}/redis@5.conf</string>
-            <string>--daemonize no</string>
-          </array>
-          <key>RunAtLoad</key>
-          <true/>
-          <key>WorkingDirectory</key>
-          <string>#{var}</string>
-          <key>StandardErrorPath</key>
-          <string>#{var}/log/redis@5.log</string>
-          <key>StandardOutPath</key>
-          <string>#{var}/log/redis@5.log</string>
-        </dict>
-      </plist>
-    EOS
+  service do
+    run [opt_bin/"redis-server", etc/"redis.conf"]
+    keep_alive true
+    error_log_path var/"log/redis.log"
+    log_path var/"log/redis.log"
+    working_dir var
   end
 
   test do
     system bin/"redis-server", "--test-memory", "2"
-    %w[run db/redis@5 log].each { |p| assert_predicate var/p, :exist?, "#{var/p} doesn't exist!" }
+    %w[run db/redis log].each { |p| assert_predicate var/p, :exist?, "#{var/p} doesn't exist!" }
   end
 end
 __END__
