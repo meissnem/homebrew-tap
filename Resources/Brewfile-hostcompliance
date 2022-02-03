@@ -1,0 +1,9 @@
+tap "elastic/tap"
+tap "meissnem/tap"
+
+brew "elastic/tap/elasticsearch-full"
+brew "elastic/tap/kibana-full"
+
+brew "meissnem/tap/hc-redis"
+brew "meissnem/tap/hc-postgresql"
+brew "meissnem/tap/hc-postgis"
