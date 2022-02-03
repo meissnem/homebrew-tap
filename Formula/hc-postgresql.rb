@@ -12,9 +12,11 @@ class HcPostgresql < Formula
 
   bottle do
     root_url "https://github.com/meissnem/homebrew-tap/releases/download/hc-postgresql-11.14"
-    sha256 big_sur:      "200b75f4e7c8a47599ef0d93b82a39212d7605fab687a482660718e71dad2e81"
-    sha256 catalina:     "ce6e538e65e5b5767f4d8d47a716ba46e79121f01627c693b4d7cde1d0ff522b"
-    sha256 x86_64_linux: "b362745e3961dc78c7698c3a2a5a4e61be313745fad1108e4e57e1f2e788a40c"
+    sha256 arm64_monterey: "2c3d566b49a5d7219e796ab6d9d624da62bef21de58efc6640067396e9533212"
+    sha256 big_sur:        "200b75f4e7c8a47599ef0d93b82a39212d7605fab687a482660718e71dad2e81"
+    sha256 catalina:       "ce6e538e65e5b5767f4d8d47a716ba46e79121f01627c693b4d7cde1d0ff522b"
+    sha256 monterey:       "08186a41013217d3ff22e37b1e1bf4ba5ce7f6623c96fe1d0b2e5798653a186b"
+    sha256 x86_64_linux:   "b362745e3961dc78c7698c3a2a5a4e61be313745fad1108e4e57e1f2e788a40c"
   end
 
   # https://www.postgresql.org/support/versioning/

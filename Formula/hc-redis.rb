@@ -12,9 +12,10 @@ class HcRedis < Formula
 
   bottle do
     root_url "https://github.com/meissnem/homebrew-tap/releases/download/hc-redis-5.0.14"
-    sha256 cellar: :any_skip_relocation, big_sur:      "2daba5946e76e936680ab7589169c5d223a68ec7b5be1538b8892d06d6330c9c"
-    sha256 cellar: :any_skip_relocation, catalina:     "3240cf199901cbf9ac32b54081f3e9f1e8a2748f30820c298f93a9370125b6de"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "9212ecdcd237f9e86c76467b40b9ca2239554916d3c14ee0615e42c7e82bfb68"
+    sha256 cellar: :any_skip_relocation, arm64_monterey: "34969584780b8d8796928e132538ae6cef206fe1c8b519ae69c3ebdbaec44ada"
+    sha256 cellar: :any_skip_relocation, big_sur:        "2daba5946e76e936680ab7589169c5d223a68ec7b5be1538b8892d06d6330c9c"
+    sha256 cellar: :any_skip_relocation, catalina:       "3240cf199901cbf9ac32b54081f3e9f1e8a2748f30820c298f93a9370125b6de"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:   "9212ecdcd237f9e86c76467b40b9ca2239554916d3c14ee0615e42c7e82bfb68"
   end
 
   depends_on "openssl@1.1"

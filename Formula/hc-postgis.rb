@@ -6,8 +6,9 @@ class HcPostgis < Formula
 
   bottle do
     root_url "https://github.com/meissnem/homebrew-tap/releases/download/hc-postgis-2.5.5"
-    sha256 cellar: :any, big_sur:  "35ff2f647d3441df0d5c5f17f6c555252bf67328beda4848bc2170145cc2f0ed"
-    sha256 cellar: :any, catalina: "508a5219a369a74d5f4c19dfa1dff2a68e3441a052d6252c57cc5c3c2a9d9182"
+    sha256 cellar: :any, arm64_monterey: "7154acad86ad417e6664bba094fb001398ec06ec781efe42efbfead664092f63"
+    sha256 cellar: :any, big_sur:        "35ff2f647d3441df0d5c5f17f6c555252bf67328beda4848bc2170145cc2f0ed"
+    sha256 cellar: :any, catalina:       "508a5219a369a74d5f4c19dfa1dff2a68e3441a052d6252c57cc5c3c2a9d9182"
   end
 
   depends_on "gpp" => :build
