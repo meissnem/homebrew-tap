@@ -4,6 +4,12 @@ class HcPostgis < Formula
   url "https://download.osgeo.org/postgis/source/postgis-2.5.5.tar.gz"
   sha256 "1217a0212aaa143e44831849d1845b198f248923d7e96634219d3369a6ec8714"
 
+  bottle do
+    root_url "https://github.com/meissnem/homebrew-tap/releases/download/hc-postgis-2.5.5"
+    sha256 cellar: :any, big_sur:  "35ff2f647d3441df0d5c5f17f6c555252bf67328beda4848bc2170145cc2f0ed"
+    sha256 cellar: :any, catalina: "508a5219a369a74d5f4c19dfa1dff2a68e3441a052d6252c57cc5c3c2a9d9182"
+  end
+
   depends_on "gpp" => :build
   depends_on "pkg-config" => :build
   depends_on "gdal" # for GeoJSON and raster handling
