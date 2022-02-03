@@ -6,9 +6,11 @@ class HcProj < Formula
 
   bottle do
     root_url "https://github.com/meissnem/homebrew-tap/releases/download/hc-proj-5.2.0"
-    sha256 big_sur:      "dea48265e0ce468890a1254a5fbdd54c278d8cee6658b1a0b68657591079655b"
-    sha256 catalina:     "a8f4f8c397f1e8b8188958e3ebefccb4a4455b640c81545e015a8de4ccbe8bc0"
-    sha256 x86_64_linux: "8b8885dd10b16d62e4de030375c62a5ab287925bd6ec41fdd8ea7543e602be39"
+    sha256 arm64_monterey: "f81bd706b4fc945669df40f6736a33ec8fe2a818b210a835cf63cede928c0d12"
+    sha256 big_sur:        "dea48265e0ce468890a1254a5fbdd54c278d8cee6658b1a0b68657591079655b"
+    sha256 catalina:       "a8f4f8c397f1e8b8188958e3ebefccb4a4455b640c81545e015a8de4ccbe8bc0"
+    sha256 monterey:       "00354537e59ab240a9bfd8551bc0fadace39814a396053311c9b71935552996c"
+    sha256 x86_64_linux:   "8b8885dd10b16d62e4de030375c62a5ab287925bd6ec41fdd8ea7543e602be39"
   end
 
   keg_only :versioned_formula
