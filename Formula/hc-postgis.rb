@@ -4,6 +4,9 @@ class HcPostgis < Formula
   url "https://download.osgeo.org/postgis/source/postgis-2.5.5.tar.gz"
   sha256 "1217a0212aaa143e44831849d1845b198f248923d7e96634219d3369a6ec8714"
 
+  # this is not true, but I'm lazy and I can't get it working on Linux easily
+  depends_on :macos
+
   depends_on "gpp" => :build
   depends_on "pkg-config" => :build
   depends_on "gdal" # for GeoJSON and raster handling
