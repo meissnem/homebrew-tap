@@ -4,6 +4,12 @@ class PythonAT27 < Formula
   url "https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz"
   sha256 "b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808ed4594812edef43"
 
+  bottle do
+    root_url "https://github.com/meissnem/homebrew-tap/releases/download/python@2.7-2.7.18"
+    sha256 big_sur:  "1e113f034ffdea012b705090c8d117fed57b6a49ca735d287f8208e61b7fba34"
+    sha256 catalina: "6dbb05f971dfa6cf71002b7896731eec8af0ad617a52f99af0ef58dadd9d2e0e"
+  end
+
   # setuptools remembers the build flags python is built with and uses them to
   # build packages later. Xcode-only systems need different flags.
   pour_bottle? do
