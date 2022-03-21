@@ -4,14 +4,6 @@ class PythonAT27 < Formula
   url "https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz"
   sha256 "b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808ed4594812edef43"
 
-  bottle do
-    root_url "https://github.com/meissnem/homebrew-tap/releases/download/python@2.7-2.7.18"
-    sha256 arm64_monterey: "705f79d353cce09dacd958f3932fe542fd189e2ba93d44bbc29a526b80d9dc20"
-    sha256 big_sur:        "1e113f034ffdea012b705090c8d117fed57b6a49ca735d287f8208e61b7fba34"
-    sha256 catalina:       "6dbb05f971dfa6cf71002b7896731eec8af0ad617a52f99af0ef58dadd9d2e0e"
-    sha256 monterey:       "5d18df38242f59b99c2c912d3b8da7e2110a5ec71d6e23099275112c50bf9df0"
-  end
-
   # setuptools remembers the build flags python is built with and uses them to
   # build packages later. Xcode-only systems need different flags.
   pour_bottle? do
@@ -54,11 +46,7 @@ class PythonAT27 < Formula
   patch :DATA
 
   def lib_cellar
-    if OS.mac?
-      prefix/"Frameworks/Python.framework/Versions/2.7/lib/python2.7"
-    else
-      prefix/"lib/python2.7"
-    end
+    prefix/"lib/python2.7"
   end
 
   def site_packages_cellar
@@ -79,17 +67,12 @@ class PythonAT27 < Formula
     args = %W[
       --prefix=#{prefix}
       --enable-ipv6
+      --enable-shared
       --datarootdir=#{share}
       --datadir=#{share}
       --without-ensurepip
       --with-system-ffi
     ]
-
-    args << if OS.mac?
-      "--enable-framework=#{frameworks}"
-    else
-      "--enable-shared"
-    end
 
     # See upstream bug report from 22 Jan 2018 "Significant performance problems
     # with Python 2.7 built with clang 3.x or 4.x"
@@ -143,10 +126,6 @@ class PythonAT27 < Formula
     # `brew install enchant && pip install pyenchant`
     inreplace "./Lib/ctypes/macholib/dyld.py" do |f|
       f.gsub! "DEFAULT_LIBRARY_FALLBACK = [", "DEFAULT_LIBRARY_FALLBACK = [ '#{HOMEBREW_PREFIX}/lib',"
-      if OS.mac?
-        f.gsub! "DEFAULT_FRAMEWORK_FALLBACK = [",
-"DEFAULT_FRAMEWORK_FALLBACK = [ '#{HOMEBREW_PREFIX}/Frameworks',"
-      end
     end
 
     args << "CFLAGS=#{cflags.join(" ")}" unless cflags.empty?
@@ -158,45 +137,17 @@ class PythonAT27 < Formula
 
     ENV.deparallelize do
       # Tell Python not to install into /Applications
-      system "make", "install", "PYTHONAPPSDIR=#{prefix}"
-      system "make", "frameworkinstallextras", "PYTHONAPPSDIR=#{pkgshare}" if OS.mac?
+      system "make", "install"
     end
 
-    if OS.mac?
-      # Fixes setting Python build flags for certain software
-      # See: https://github.com/Homebrew/homebrew/pull/20182
-      # https://bugs.python.org/issue3588
-      inreplace lib_cellar/"config/Makefile" do |s|
-        s.change_make_var! "LINKFORSHARED",
-          "-u _PyMac_Error $(PYTHONFRAMEWORKINSTALLDIR)/Versions/$(VERSION)/$(PYTHONFRAMEWORK)"
-      end
-
-      # Prevent third-party packages from building against fragile Cellar paths
-      inreplace [lib_cellar/"_sysconfigdata.py",
-                 lib_cellar/"config/Makefile",
-                 frameworks/"Python.framework/Versions/Current/lib/pkgconfig/python-2.7.pc"],
-                prefix, opt_prefix
-
-      # Symlink the pkgconfig files into HOMEBREW_PREFIX so they're accessible.
-      (lib/"pkgconfig").install_symlink Dir[frameworks/"Python.framework/Versions/Current/lib/pkgconfig/*"]
-    else
-      # Prevent third-party packages from building against fragile Cellar paths
-      inreplace [lib_cellar/"_sysconfigdata.py",
-                 lib_cellar/"config/Makefile",
-                 lib/"pkgconfig/python-2.7.pc"],
-                prefix, opt_prefix
-    end
+    # Prevent third-party packages from building against fragile Cellar paths
+    inreplace [lib_cellar/"_sysconfigdata.py",
+               lib_cellar/"config/Makefile",
+               lib/"pkgconfig/python-2.7.pc"],
+              prefix, opt_prefix
 
     # Remove 2to3 because Python 3 also installs it
     rm bin/"2to3"
-
-    if OS.mac?
-      # A fix, because python and python@2 both want to install Python.framework
-      # and therefore we can't link both into HOMEBREW_PREFIX/Frameworks
-      # https://github.com/Homebrew/homebrew/issues/15943
-      ["Headers", "Python", "Resources"].each { |f| rm(prefix/"Frameworks/Python.framework/#{f}") }
-      rm prefix/"Frameworks/Python.framework/Versions/Current"
-    end
 
     # Remove the site-packages that Python created in its Cellar.
     site_packages_cellar.rmtree
