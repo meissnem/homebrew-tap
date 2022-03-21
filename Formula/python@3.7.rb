@@ -10,6 +10,12 @@ class PythonAT37 < Formula
     regex(%r{href=.*?v?(3\.7(?:\.\d+)*)/?["' >]}i)
   end
 
+  bottle do
+    root_url "https://github.com/meissnem/homebrew-tap/releases/download/python@3.7-3.7.13"
+    sha256 big_sur:  "67ff1bbeaf6f6dc2ca6a4d6949e79b848fdddf492630258ce7adf4c7999c611d"
+    sha256 catalina: "c4e3be02c15028fd66dbf90e946b47f7b1b03e63b37f9ebc19d2f139921f0f8e"
+  end
+
   # setuptools remembers the build flags python is built with and uses them to
   # build packages later. Xcode-only systems need different flags.
   pour_bottle? only_if: :clt_installed
