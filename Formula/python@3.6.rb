@@ -354,7 +354,7 @@ class PythonAT36 < Formula
 
           # the Cellar site-packages is a symlink to the HOMEBREW_PREFIX
           # site_packages; prefer the shorter paths
-          long_prefix = re.compile(r'#{rack}/[0-9\._abrc]+/Frameworks/Python\.framework/Versions/#{version.major_minor}/lib/python#{version.major_minor}/site-packages')
+          long_prefix = re.compile(r'#{rack}/[0-9._abrc]+/Frameworks/Python.framework/Versions/#{version.major_minor}/lib/python#{version.major_minor}/site-packages')
           sys.path = [long_prefix.sub('#{site_packages}', p) for p in sys.path]
 
           # Set the sys.executable to use the opt_prefix. Only do this if PYTHONEXECUTABLE is not
@@ -388,10 +388,10 @@ class PythonAT36 < Formula
     system "#{bin}/python#{version.major_minor}", "-c", "import sqlite3"
     # Check if some other modules import. Then the linked libs are working.
 
-    on_macos do
+    if OS.mac? && (MacOS.full_version < "11.1")
       # Temporary failure on macOS 11.1 due to https://bugs.python.org/issue42480
       # Reenable unconditionnaly once Apple fixes the Tcl/Tk issue
-      system "#{bin}/python#{version.major_minor}", "-c", "import tkinter; root = tkinter.Tk()" if MacOS.full_version < "11.1"
+      system "#{bin}/python#{version.major_minor}", "-c", "import tkinter; root = tkinter.Tk()"
     end
 
     system "#{bin}/python#{version.major_minor}", "-c", "import _decimal"

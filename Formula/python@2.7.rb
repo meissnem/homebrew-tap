@@ -264,7 +264,7 @@ class PythonAT27 < Formula
 
           # the Cellar site-packages is a symlink to the HOMEBREW_PREFIX
           # site_packages; prefer the shorter paths
-          long_prefix = re.compile(r'#{rack}/[0-9\._abrc]+/Frameworks/Python\.framework/Versions/2\.7/lib/python2\.7/site-packages')
+          long_prefix = re.compile(r'#{rack}/[0-9._abrc]+/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages')
           sys.path = [long_prefix.sub('#{site_packages}', p) for p in sys.path]
 
           # LINKFORSHARED (and python-config --ldflags) return the
