@@ -12,6 +12,7 @@ class PythonAT37 < Formula
 
   bottle do
     root_url "https://github.com/meissnem/homebrew-tap/releases/download/python@3.7-3.7.17"
+    sha256 ventura: "18cceafed344bf43661185caa92237177ac2aa55ab0eef6ec02066a5bb30fe35"
   end
 
   # setuptools remembers the build flags python is built with and uses them to
