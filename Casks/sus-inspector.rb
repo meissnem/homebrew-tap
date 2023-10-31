@@ -1,6 +1,6 @@
 cask "sus-inspector" do
-  version "2.0b1"
-  sha256 "344d43ba3e77320f9a9d5a5b9383d5c28ada63565f0c375b4dda5f2495d92b97"
+  version "2.1"
+  sha256 "660c7d5409841fe3cfb18cca8e119b51f8e1defb622dd1ea239c5a78443b82b7"
 
   url "https://github.com/hjuutilainen/sus-inspector/releases/download/v#{version}/SUS-Inspector-#{version}.dmg"
   name "SUS Inspector"
@@ -11,13 +11,6 @@ cask "sus-inspector" do
     url :stable
     strategy :github_latest
   end
-
-  # livecheck do
-  #   url "https://www.xquartz.org/releases/sparkle/release.xml"
-  #   strategy :sparkle do |item|
-  #     item.short_version.delete_prefix("XQuartz-")
-  #   end
-  # end
 
   app "SUS Inspector.app"
 
