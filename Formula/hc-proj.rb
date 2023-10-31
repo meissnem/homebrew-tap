@@ -4,6 +4,11 @@ class HcProj < Formula
   url "https://download.osgeo.org/proj/proj-5.2.0.tar.gz"
   sha256 "ef919499ffbc62a4aae2659a55e2b25ff09cccbbe230656ba71c6224056c7e60"
 
+  livecheck do
+    url "https://download.osgeo.org/proj/"
+    regex(/href=.*?proj[\._-](5[\d\.]+)\.tar/i)
+  end
+
   bottle do
     root_url "https://github.com/meissnem/homebrew-tap/releases/download/hc-proj-5.2.0"
     sha256 arm64_monterey: "f81bd706b4fc945669df40f6736a33ec8fe2a818b210a835cf63cede928c0d12"
