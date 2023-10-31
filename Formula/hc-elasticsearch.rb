@@ -1,8 +1,17 @@
 class HcElasticsearch < Formula
   desc "Distributed search & analytics engine"
   homepage "https://www.elastic.co/products/elasticsearch"
-  url "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.14-darwin-x86_64.tar.gz?tap=elastic/homebrew-tap"
-  sha256 "3dc253b91a3fc984e2bdaaa43f64ae3844c8dfebd0cd30ab59756a887fcbea74"
+
+  on_macos do
+    on_arm do
+      url "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.14-darwin-aarch64.tar.gz?tap=elastic/homebrew-tap"
+      sha256 "cffaf98c120fdba5caa638ad9487c9684c6c3a155b169e1eaec263bbd8516acd"
+    end
+    on_intel do
+      url "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.14-darwin-x86_64.tar.gz?tap=elastic/homebrew-tap"
+      sha256 "3dc253b91a3fc984e2bdaaa43f64ae3844c8dfebd0cd30ab59756a887fcbea74"
+    end
+  end
 
   depends_on "openjdk"
   conflicts_with "elasticsearch"
@@ -42,7 +51,9 @@ class HcElasticsearch < Formula
     end
     bin.env_script_all_files(libexec/"bin", {})
 
-    system "codesign", "-f", "-s", "-", "#{libexec}/modules/x-pack-ml/platform/darwin-x86_64/controller.app", "--deep"
+    darwin_platform = Hardware::CPU.arm? ? "darwin-aarch64" : "darwin-x86_64"
+
+    system "codesign", "-f", "-s", "-", "#{libexec}/modules/x-pack-ml/platform/#{darwin_platform}/controller.app", "--deep"
     system "find", "#{libexec}/jdk.app/Contents/Home/bin", "-type", "f", "-exec", "codesign", "-f", "-s", "-", "{}",
            ";"
   end
