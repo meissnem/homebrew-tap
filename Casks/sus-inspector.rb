@@ -14,6 +14,6 @@ cask "sus-inspector" do
 
   app "SUS Inspector.app"
 
-  zap trash: ["~/Library/Application Support/SUS Inspector/*"],
-      rmdir: ["~/Library/Application Support/SUS Inspector"]
+  zap trash: "~/Library/Application Support/SUS Inspector/*",
+      rmdir: "~/Library/Application Support/SUS Inspector"
 end

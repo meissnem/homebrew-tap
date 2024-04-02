@@ -2,18 +2,32 @@ class HcElasticsearch < Formula
   desc "Distributed search & analytics engine"
   homepage "https://www.elastic.co/products/elasticsearch"
 
+  depends_on "openjdk"
+
   on_macos do
     on_arm do
-      url "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.14-darwin-aarch64.tar.gz?tap=elastic/homebrew-tap"
-      sha256 "cffaf98c120fdba5caa638ad9487c9684c6c3a155b169e1eaec263bbd8516acd"
+      url "https://artifacts.elastic.co/downloads/elasticsearch/" \
+          "elasticsearch-7.17.19-darwin-aarch64.tar.gz?tap=elastic/homebrew-tap"
+      sha256 "73637822579d71ac429414cf0b42d9856926ea176b0d1729f87495cc1645e30d"
     end
     on_intel do
-      url "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.14-darwin-x86_64.tar.gz?tap=elastic/homebrew-tap"
-      sha256 "3dc253b91a3fc984e2bdaaa43f64ae3844c8dfebd0cd30ab59756a887fcbea74"
+      url "https://artifacts.elastic.co/downloads/elasticsearch/" \
+          "elasticsearch-7.17.19-darwin-x86_64.tar.gz?tap=elastic/homebrew-tap"
+      sha256 "b474a9576f5d49b56d80610dfda4d3d60fb76382f11d3b37ea56978f1822a9cf"
     end
   end
-
-  depends_on "openjdk"
+  on_linux do
+    on_arm do
+      url "https://artifacts.elastic.co/downloads/elasticsearch/" \
+          "elasticsearch-7.17.19-linux-aarch64.tar.gz?tap=elastic/homebrew-tap"
+      sha256 "387d7817d722fb275eb59de2c42672108cba25aac48a6786e80c796ea6d3dc11"
+    end
+    on_intel do
+      url "https://artifacts.elastic.co/downloads/elasticsearch/" \
+          "elasticsearch-7.17.19-linux-x86_64.tar.gz?tap=elastic/homebrew-tap"
+      sha256 "71761ad170d6ce3fda2289e6eb085ce9e5c6b3ac3c4b47287f8a4722c1ebd83a"
+    end
+  end
   conflicts_with "elasticsearch"
 
   def cluster_name
@@ -53,7 +67,8 @@ class HcElasticsearch < Formula
 
     darwin_platform = Hardware::CPU.arm? ? "darwin-aarch64" : "darwin-x86_64"
 
-    system "codesign", "-f", "-s", "-", "#{libexec}/modules/x-pack-ml/platform/#{darwin_platform}/controller.app", "--deep"
+    system "codesign", "-f", "-s", "-", "#{libexec}/modules/x-pack-ml/platform/#{darwin_platform}/controller.app",
+"--deep"
     system "find", "#{libexec}/jdk.app/Contents/Home/bin", "-type", "f", "-exec", "codesign", "-f", "-s", "-", "{}",
            ";"
   end

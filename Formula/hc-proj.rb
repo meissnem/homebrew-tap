@@ -6,7 +6,7 @@ class HcProj < Formula
 
   livecheck do
     url "https://download.osgeo.org/proj/"
-    regex(/href=.*?proj[\._-](5[\d\.]+)\.tar/i)
+    regex(/href=.*?proj[\._-](5[\d\.]+)\.t/i)
   end
 
   bottle do
