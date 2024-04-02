@@ -12,7 +12,10 @@ class PythonAT27 < Formula
         You can install them, if desired, with:
           xcode-select --install
     EOS
-    satisfy { MacOS::CLT.installed? }
+
+    on_macos do
+      satisfy { OS.mac? && MacOS::CLT.installed? }
+    end
   end
 
   depends_on "pkg-config" => :build
