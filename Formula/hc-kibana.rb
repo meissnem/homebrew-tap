@@ -1,6 +1,11 @@
 class HcKibana < Formula
   desc "Analytics and search dashboard for Elasticsearch"
   homepage "https://www.elastic.co/products/kibana"
+
+  bottle do
+    root_url "https://github.com/meissnem/homebrew-tap/releases/download/hc-kibana-7.17.19"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma: "784dbc178c84b11168225cf4d80a22dca9324f58faba09a628395254218d862e"
+  end
   depends_on :macos
 
   on_macos do
