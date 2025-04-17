@@ -18,6 +18,7 @@ cask "reunion@13" do
   end
 
   conflicts_with cask: "reunion"
+
   app "Reunion #{version.major}.app"
 
   zap trash: [

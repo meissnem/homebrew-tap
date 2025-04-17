@@ -153,7 +153,7 @@ class PythonAT27 < Formula
     rm bin/"2to3"
 
     # Remove the site-packages that Python created in its Cellar.
-    site_packages_cellar.rmtree
+    rm_r(site_packages_cellar)
 
     (libexec/"setuptools").install resource("setuptools")
     (libexec/"pip").install resource("pip")
@@ -162,11 +162,11 @@ class PythonAT27 < Formula
 
   def post_install
     # Avoid conflicts with lingering unversioned files from Python 3
-    rm_f %W[
+    rm(%W[
       #{HOMEBREW_PREFIX}/bin/easy_install
       #{HOMEBREW_PREFIX}/bin/pip
       #{HOMEBREW_PREFIX}/bin/wheel
-    ]
+    ])
 
     # Fix up the site-packages so that user-installed Python software survives
     # minor updates, such as going from 2.7.0 to 2.7.1:
@@ -179,16 +179,16 @@ class PythonAT27 < Formula
     site_packages_cellar.parent.install_symlink site_packages
 
     # Write our sitecustomize.py
-    rm_rf Dir["#{site_packages}/sitecustomize.py[co]"]
+    rm_r(Dir["#{site_packages}/sitecustomize.py[co]"])
     (site_packages/"sitecustomize.py").atomic_write(sitecustomize)
 
     # Remove old setuptools installations that may still fly around and be
     # listed in the easy_install.pth. This can break setuptools build with
     # zipimport.ZipImportError: bad local file header
     # setuptools-0.9.5-py3.3.egg
-    rm_rf Dir["#{site_packages}/setuptools*"]
-    rm_rf Dir["#{site_packages}/distribute*"]
-    rm_rf Dir["#{site_packages}/pip[-_.][0-9]*", "#{site_packages}/pip"]
+    rm_r(Dir["#{site_packages}/setuptools*"])
+    rm_r(Dir["#{site_packages}/distribute*"])
+    rm_r(Dir["#{site_packages}/pip[-_.][0-9]*", "#{site_packages}/pip"])
 
     setup_args = ["-s", "setup.py", "--no-user-cfg", "install", "--force",
                   "--verbose",
